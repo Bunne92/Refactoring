@@ -35,8 +35,7 @@ double ohms_lag(double r, double i){
 }
 
 double res_tot(double r1, double r2, double r3){
-    double rtot= (1/r1) + (1/r2) + (1/r3);
-    return 1/rtot;
+    return 1/((1/r1) + (1/r2) + (1/r3));
 }
 
 double eff_enk(double u, double i){
@@ -60,8 +59,7 @@ double aktiv_3fas(double u, double i, double cos){
 double input_check(int max_value){
   double input_value;
   scanf("%lf", &input_value);
-  if(input_value > max_value)
-  {
+  if(input_value > max_value || input_value <0 && input_value>0){
       printf("För högt värde, försök igen: \n");
   }
     return input_value;
@@ -74,10 +72,9 @@ int main()
     system("cls");
     bool exit = false;
     double value_1, value_2, value_3;
+    int val;
 
     while (exit == false){
-
-        int val;
         printf("\nVälj vilka storheter du vill beräkna:\n"
                "Välj 1 för: OHMS LAG\n"
                "Välj 2 för: Rtot\n"
