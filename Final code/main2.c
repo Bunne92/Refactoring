@@ -28,6 +28,7 @@ AKTIV EFFEKT 3-FAS ~: P=U*I*sqrt(3)*cos()
 #define MAX_RES   20000
 #define MAX_AMP     440
 #define MAX_VOLT    400
+
 double ohms_lag(double r, double i){
     double u = i * r;
     return u;
@@ -71,136 +72,129 @@ int main()
     system("chcp 1252");
     system("cls");
     bool exit = false;
+    double value_1, value_2, value_3;
 
     while (exit == false)
     {
         printf("\n");
         int val;
 
-        printf("Välj vilka storheter du vill beräkna:\n");
-        printf("Välj 1 för: OHMS LAG\n");
-        printf("Välj 2 för: Rtot\n");
-        printf("Välj 3 för: EFFEKTLAGEN ENKEL\n");
-        printf("Välj 4 för: SKENBAR EFFEKT ENFAS\n");
-        printf("Välj 5 för: AKTIV EFFEKT/MEDELEFFEKT ENFAS\n");
-        printf("Välj 6 för: SKENBAR EFFEKT 3-FAS\n");
-        printf("Välj 7 för: AKTIV EFFEKT 3-FAS\n");
-        printf("Välj 0 för: FÖR ATT AVSLUTA\n");
+        printf("Välj vilka storheter du vill beräkna:\n"
+               "Välj 1 för: OHMS LAG\n"
+               "Välj 2 för: Rtot\n"
+               "Välj 3 för: EFFEKTLAGEN ENKEL\n"
+               "Välj 4 för: SKENBAR EFFEKT ENFAS\n"
+               "Välj 5 för: AKTIV EFFEKT/MEDELEFFEKT ENFAS\n"
+               "Välj 6 för: SKENBAR EFFEKT 3-FAS\n"
+               "Välj 7 för: AKTIV EFFEKT 3-FAS\n"
+               "Välj 0 för: FÖR ATT AVSLUTA\n");
 
         scanf("%d", &val);
 
         if(val == 1)
         {
-            printf("Ohms lag spänningen(volt/V) betäckning U lika med Resistansen(Ohm) betäckning R \n");
-            printf("gånger Strömmen(Ampere) med betäckningen I. Kort U=R*I. \n\n");
-            double r, i;
-            printf("Skriv resistans R < 20 000ohm: \n ");
-            r = input_check(MAX_RES);
-            if(r>MAX_RES) continue;
+            printf("Ohms lag spänningen(volt/V) betäckning U lika med Resistansen(Ohm) betäckning R \n"
+                   "gånger Strömmen(Ampere) med betäckningen I. Kort U=R*I. \n\n"
+                   "Skriv resistans R < 20 000ohm: \n ");
+            value_1 = input_check(MAX_RES);
+            if(value_1>MAX_RES) continue;
 
             printf("Skriv ström I < 440 Ampere: \n");
-            i = input_check(MAX_AMP);
-            if(i>MAX_AMP) continue;
-
-            printf("%f V\n", ohms_lag(r, i));
+            value_2 = input_check(MAX_AMP);
+            if(value_2>MAX_AMP) continue;
+            printf("%f V\n", ohms_lag(value_1, value_2));
         }
 
         else if(val == 2)
         {
-            printf("Resistans sammankopplade i parallella kretsar är lika med 1 delat Resistans R total är lika med\n");
-            printf("Resistans 1/R1 + 1/R2 + 1/R3 då vi högst använder tre resistanser.\n\n");
-            double r1,r2,r3;
-            printf("Skriv resistans R1 < 20 000ohm: \n ");
-            r1 = input_check(MAX_RES);
-            if(r1>MAX_RES) continue;
+            printf("Resistans sammankopplade i parallella kretsar är lika med 1 delat Resistans R total är lika med\n"
+                   "Resistans 1/R1 + 1/R2 + 1/R3 då vi högst använder tre resistanser.\n\n"
+                   "Skriv resistans R1 < 20 000ohm: \n ");
+            value_1 = input_check(MAX_RES);
+            if(value_1>MAX_RES) continue;
             printf("Skriv resistans R2 < 20 000ohm: \n ");
-            r2 = input_check(MAX_RES);
-            if(r2>MAX_RES) continue;
+            value_2 = input_check(MAX_RES);
+            if(value_2>MAX_RES) continue;
             printf("Skriv resistans R3 < 20 000ohm: \n ");
-            r3 = input_check(MAX_RES);
-            if(r3>MAX_RES) continue;
+            value_3 = input_check(MAX_RES);
+            if(value_3>MAX_RES) continue;
 
-            printf("%f Ohm\n", res_tot(r1, r2, r3));
+            printf("%f Ohm\n", res_tot(value_1, value_2, value_3));
         }
 
         else if(val == 3)
         {
-            printf("Effektlagen enkel för likström är effekten P i Watt (W) lika med spänningen U i volt(V)\n");
-            printf("gånger strömmen I i Ampere(A): \n\n");
-            double u, i;
-            printf("Skriv spännngen U i volt(V): \n ");
-            scanf("%lf", &u);
+            printf("Effektlagen enkel för likström är effekten P i Watt (W) lika med spänningen U i volt(V)\n"
+                   "gånger strömmen I i Ampere(A): \n\n"
+                   "Skriv spännngen U i volt(V): \n ");
+            scanf("%lf", &value_1);
             printf("Skriv ström Ampere I < 440A: \n");
-            i = input_check(MAX_AMP);
-            if(i>MAX_AMP) continue;
-            printf("%f W\n", eff_enk(u, i));
+            value_2 = input_check(MAX_AMP);
+            if(value_2>MAX_AMP) continue;
+            printf("%f W\n", eff_enk(value_1, value_2));
         }
         else if(val == 4)
         {
-            printf("Skenbar effekt enfas räknas med storheten VA(VoltAmpere) som är lika med spänningen U i volt(V)\n");
-            printf("gånger strömmen I i ampere(A)\n\n");
-            double u, i;
-            printf("Skriv Spänningen U i volt: \n ");
-            scanf("%lf", &u);
+            printf("Skenbar effekt enfas räknas med storheten VA(VoltAmpere) som är lika med spänningen U i volt(V)\n"
+                   "gånger strömmen I i ampere(A)\n\n"
+                   "Skriv Spänningen U i volt: \n ");
+            scanf("%lf", &value_1);
             printf("Skriv ström I < 440A: \n");
-            i = input_check(MAX_AMP);
-            if(i>MAX_AMP) continue;
-            printf("%f VA\n", sken_eff(u, i));
+            value_2 = input_check(MAX_AMP);
+            if(value_2>MAX_AMP) continue;
+            printf("%f VA\n", sken_eff(value_1, value_2));
         }
 
         else if(val == 5)
         {
-            printf("Aktiv medelefdekt enfas är lika med effekt P i watt(W) lika med spänningen U i volt(V) gånger strömmen I \n");
-            printf("i Ampere gånger cosinus fi/efkektfaktor < 1:\n\n");
-            double u, i, cos;
-            printf("Skriv spänning U i volt: \n ");
-            scanf("%lf", &u);
+            printf("Aktiv medelefdekt enfas är lika med effekt P i watt(W) lika med spänningen U i volt(V) gånger strömmen I \n"
+                   "i Ampere gånger cosinus fi/efkektfaktor < 1:\n\n"
+                   "Skriv spänning U i volt: \n ");
+            scanf("%lf", &value_1);
             printf("Skriv ström I: \n");
-            i = input_check(MAX_AMP);
-            if(i>MAX_AMP) continue;
+            value_2 = input_check(MAX_AMP);
+            if(value_2>MAX_AMP) continue;
             printf("Skriv in effektfaktorn cos > 0 && cos < 1:\n");
-            scanf("%lf", &cos);
-            if (cos < 0 && cos > 1)
+            scanf("%lf", &value_3);
+            if (value_3 < 0 && value_3 > 1)
             {
                 printf("Fel värde, försök igen\n");
                 continue;
             }
-            printf("%f W\n", aktiv_eff(u, i, cos));
+            printf("%f W\n", aktiv_eff(value_1, value_2, value_3));
         }
         else if(val == 6)
         {
-            printf("3-fas skenbar effekt är växelspänning är skenbar effekt S i voltampere(VA) lika med spänningen U i volt(V) \n");
-            printf("gånger strömmen I i ampere(A) gånger roten ur 3 SQRT(3).\n\n");
-            double u, i;
-            printf("Skriv spänning U i volt(V) < 400V: \n ");
-            u = input_check(MAX_VOLT);
-            if(u>MAX_VOLT) continue;
+            printf("3-fas skenbar effekt är växelspänning är skenbar effekt S i voltampere(VA) lika med spänningen U i volt(V) \n"
+                   "gånger strömmen I i ampere(A) gånger roten ur 3 SQRT(3).\n\n"
+                   "Skriv spänning U i volt(V) < 400V: \n ");
+            value_1 = input_check(MAX_VOLT);
+            if(value_1>MAX_VOLT) continue;
             printf("Skriv ström I i ampere < 440: \n");
-            i = input_check(MAX_AMP);
-            if(i>MAX_AMP) continue;
-            printf("%f VA\n", sken_3fas(u, i));
+            value_2 = input_check(MAX_AMP);
+            if(value_2>MAX_AMP) continue;
+            printf("%f VA\n", sken_3fas(value_1, value_2));
         }
         else if(val == 7)
         {
 
-            printf("3-fas aktiv effekt är effekten P i Watt(W) lika med spänningen U i volt(V) gånger strömmen I i ampere(A)\n");
-            printf("gånger cos < 1 && cos > 0 gånger roten ur 3 SQRT(3).\n\n");
-            double u, i, cos;
-            printf("Skriv Spänningen U i volt(V): \n ");
-            u = input_check(MAX_VOLT);
-            if(u>MAX_VOLT) continue;
+            printf("3-fas aktiv effekt är effekten P i Watt(W) lika med spänningen U i volt(V) gånger strömmen I i ampere(A)\n"
+                   "gånger cos < 1 && cos > 0 gånger roten ur 3 SQRT(3).\n\n"
+                   "Skriv Spänningen U i volt(V): \n ");
+            value_1 = input_check(MAX_VOLT);
+            if(value_1>MAX_VOLT) continue;
             printf("Skriv ström I i ampere(A): \n");
-            i = input_check(MAX_AMP);
-            if(i>MAX_AMP) continue;
+            value_2 = input_check(MAX_AMP);
+            if(value_2>MAX_AMP) continue;
             printf("Skriv in effektfaktorn cos > 0 && cos < 1: \n");
-            scanf("%lf", &cos);
-            if (cos < 0 && cos > 1)
+            scanf("%lf", &value_3);
+            if (value_3 < 0 && value_3 > 1)
             {
                 printf("För högt värde, försök igen: \n");
                 continue;
             }
 
-            printf("%f W\n", aktiv_3fas(u ,i, cos));
+            printf("%f W\n", aktiv_3fas(value_1 ,value_2, value_3));
         }
         else if (val == 0)
         {
