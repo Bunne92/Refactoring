@@ -65,6 +65,20 @@ double input_check(int max_value){
     return input_value;
 }
 
+int menu(){
+  int val;
+  printf("\nVälj vilka storheter du vill beräkna:\n"
+         "Välj 1 för: OHMS LAG\n"
+         "Välj 2 för: Rtot\n"
+         "Välj 3 för: EFFEKTLAGEN ENKEL\n"
+         "Välj 4 för: SKENBAR EFFEKT ENFAS\n"
+         "Välj 5 för: AKTIV EFFEKT/MEDELEFFEKT ENFAS\n"
+         "Välj 6 för: SKENBAR EFFEKT 3-FAS\n"
+         "Välj 7 för: AKTIV EFFEKT 3-FAS\n"
+         "Välj 0 för: FÖR ATT AVSLUTA\n");
+  scanf("%d", &val);
+  return val;
+}
 
 int main()
 {
@@ -75,17 +89,7 @@ int main()
     int val;
 
     while (exit == false){
-        printf("\nVälj vilka storheter du vill beräkna:\n"
-               "Välj 1 för: OHMS LAG\n"
-               "Välj 2 för: Rtot\n"
-               "Välj 3 för: EFFEKTLAGEN ENKEL\n"
-               "Välj 4 för: SKENBAR EFFEKT ENFAS\n"
-               "Välj 5 för: AKTIV EFFEKT/MEDELEFFEKT ENFAS\n"
-               "Välj 6 för: SKENBAR EFFEKT 3-FAS\n"
-               "Välj 7 för: AKTIV EFFEKT 3-FAS\n"
-               "Välj 0 för: FÖR ATT AVSLUTA\n");
-        scanf("%d", &val);
-
+        val = menu();
         if(val == 1){
             printf("Ohms lag spänningen(volt/V) betäckning U lika med Resistansen(Ohm) betäckning R \n"
                    "gånger Strömmen(Ampere) med betäckningen I. Kort U=R*I. \n\n"
