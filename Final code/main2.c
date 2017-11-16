@@ -24,14 +24,14 @@ AKTIV EFFEKT 3-FAS ~: P=U*I*sqrt(3)*cos()
 #include <math.h>
 #include <limits.h>
 #include <stdbool.h>
-//#include "funktioner.h"
+
 #define MAX_RES   20000
 #define MAX_AMP     440
 #define MAX_VOLT    400
 
+
 double ohms_lag(double r, double i){
-    double u = i * r;
-    return u;
+    return i * r;
 }
 
 double res_tot(double r1, double r2, double r3){
@@ -66,6 +66,7 @@ double input_check(int max_value){
   }
     return input_value;
 }
+
 
 int main()
 {
