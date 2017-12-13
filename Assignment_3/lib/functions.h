@@ -1,3 +1,3 @@
 #include <stdio.h>
 
-double calculate(operatorr, first, second);
+float calculate(float operatorr, float first, float second);

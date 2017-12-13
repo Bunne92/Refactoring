@@ -1,6 +1,6 @@
 #include "functions.h"
 
-double calculate(char operatorr, double first, double second){
+float calculate(char operatorr, float first, float second){
   if(operatorr == '+') return first + second;
   else if(operatorr == '-') return first - second;
   else if(operatorr == '*') return first * second;
