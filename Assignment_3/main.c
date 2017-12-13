@@ -1,6 +1,6 @@
 // Program to create a simple calculator
 // Performs addition, subtraction, multiplication or division depending the input from user
-
+#include "lib/functions.h"
 
 int main() {
     char operator;
